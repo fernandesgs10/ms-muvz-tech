@@ -1,0 +1,21 @@
+package br.com.gateway.buy.product.generate;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class PageGeneric<T> {
+
+
+    protected Page<T> convertPage(Page<?> pagina, Function<Object, T> converter) {
+
+        return new PageImpl<>(
+                pagina.getContent().stream().map(converter).collect(Collectors.toList()),
+                PageRequest.of(pagina.getNumber(), pagina.getSize()), pagina.getTotalElements());
+    }
+}
