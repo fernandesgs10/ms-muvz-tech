@@ -68,7 +68,7 @@ public class AddressController extends PageGeneric implements AddressApi {
         log.info("class=AddressController method=listAddressByNmAddressZipCode step=start nmName={}", nmAddressZipCode);
 
         AddressEntity addressEntity = addressService.listAddressByNmAddressZipCode(nmAddressZipCode).orElseThrow(() ->
-                new NotFoundException(messageResourceConfig.getMessage("client.nmname.notfound", "nmAddressZipCode", nmAddressZipCode)));
+                new NotFoundException(messageResourceConfig.getMessage("general.notfound", "nmAddressZipCode", nmAddressZipCode)));
 
         Address address = addressMapper.converterAddressEntityToAddress(addressEntity);
         ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(address);

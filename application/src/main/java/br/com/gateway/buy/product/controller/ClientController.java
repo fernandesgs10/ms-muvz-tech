@@ -77,7 +77,7 @@ public class ClientController extends PageGeneric implements ClientApi {
         log.info("class=ClientController method=listClientByName step=start nmName={}", nmName);
 
         ClientEntity clientEntity = clientService.listClientByName(nmName).orElseThrow(() ->
-                new NotFoundException(messageResourceConfig.getMessage("client.nmname.notfound", "nmName", nmName)));
+                new NotFoundException(messageResourceConfig.getMessage("general.notfound", "nmName", nmName)));
 
         Client clientDTO = clientMapper.converterClientEntityToClient(clientEntity);
         ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(clientDTO);
