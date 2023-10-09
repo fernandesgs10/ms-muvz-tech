@@ -66,7 +66,7 @@ public class ClientController extends PageGeneric implements ClientApi {
 
         pageConvert.content(Collections.singletonList(pageClientDto.getContent()));
         ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(pageConvert);
-        log.info("class=ClientController method=listClient step=end response{}", pageConvert);
+        log.info("class=ClientController method=listClient step=end response{}", response);
         return response;
     }
 
