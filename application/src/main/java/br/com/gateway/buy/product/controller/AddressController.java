@@ -41,7 +41,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class AddressController extends PageGeneric implements AddressApi {
 
-    private final AddressMapper modelMapper;
+    private final AddressMapper addressMapper;
     private final AddressService addressService;
     private final MessageResourceConfig messageResourceConfig;
 
@@ -50,12 +50,12 @@ public class AddressController extends PageGeneric implements AddressApi {
     public ResponseEntity createAddress(@ApiParam(value = "Optional description in new address", required = true)
                                         @Valid @RequestBody br.com.muvz.tech.address.api.Address address) {
         log.info("class=AddressController method=createAddress step=start address={}", address);
-        AddressEntity addressEntity = modelMapper.converterAddressToAddressEntity(address);
+        AddressEntity addressEntity = addressMapper.converterAddressToAddressEntity(address);
 
         AddressEntity addressEntityReturn = addressService.createAddress(addressEntity).orElseThrow(() ->
                 new MuvzException(messageResourceConfig.getMessage("general.error")));
 
-        Address addressDtoEntity = modelMapper.converterAddressEntityToAddress(addressEntityReturn);
+        Address addressDtoEntity = addressMapper.converterAddressEntityToAddress(addressEntityReturn);
 
         log.info("class=AddressController method=createAddress step=end response{}", addressDtoEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(addressDtoEntity);
@@ -70,7 +70,7 @@ public class AddressController extends PageGeneric implements AddressApi {
         AddressEntity addressEntity = addressService.listAddressByNmAddressZipCode(nmAddressZipCode).orElseThrow(() ->
                 new NotFoundException(messageResourceConfig.getMessage("client.nmname.notfound", "nmAddressZipCode", nmAddressZipCode)));
 
-        Address address = modelMapper.converterAddressEntityToAddress(addressEntity);
+        Address address = addressMapper.converterAddressEntityToAddress(addressEntity);
         ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(address);
         log.info("class=AddressController method=listAddressByNmAddressZipCode step=end response{}", response);
         return response;
@@ -94,13 +94,13 @@ public class AddressController extends PageGeneric implements AddressApi {
         Page pageClient = addressService.listAddress(pg);
 
         Page<Address> pageClientDto = convertPage(pageClient,
-                modelMapper::converterObjectToAddress);
+                addressMapper::converterObjectToAddress);
 
         br.com.muvz.tech.address.api.Page pageConvert =
-                modelMapper.converterToPageAddress(pageClientDto);
+                addressMapper.converterToPageAddress(pageClientDto);
 
         pageConvert.content(Collections.singletonList(pageClientDto.getContent()));
-        ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(pageClientDto);
+        ResponseEntity response = ResponseEntity.status(HttpStatus.OK).body(pageConvert);
         log.info("class=AddressController method=listAddress step=end response{}", response);
 
         return response;
