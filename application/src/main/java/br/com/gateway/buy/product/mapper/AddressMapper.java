@@ -2,6 +2,7 @@ package br.com.gateway.buy.product.mapper;
 
 import br.com.gateway.buy.product.entity.AddressEntity;
 import br.com.muvz.tech.client.api.Address;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
@@ -13,9 +14,10 @@ import java.io.Serializable;
 @Data
 @Builder
 @Component
+@AllArgsConstructor
 public class AddressMapper implements Serializable {
 
-    private final ModelMapper modelMapper;
+    public final ModelMapper modelMapper;
 
     public Address converterObjectToAddress(Object object) {
         return modelMapper.map(object, Address.class);

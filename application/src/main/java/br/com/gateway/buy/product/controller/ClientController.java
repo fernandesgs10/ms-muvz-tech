@@ -1,13 +1,13 @@
 package br.com.gateway.buy.product.controller;
 
-import br.com.gateway.buy.product.entity.ClientEntity;
-import br.com.gateway.buy.product.service.ClientService;
-import br.com.muvz.tech.client.api.Client;
 import br.com.gateway.buy.product.common.NotFoundException;
 import br.com.gateway.buy.product.config.MessageResourceConfig;
+import br.com.gateway.buy.product.entity.ClientEntity;
 import br.com.gateway.buy.product.generate.PageGeneric;
 import br.com.gateway.buy.product.generate.PaginationSort;
 import br.com.gateway.buy.product.mapper.ClientMapper;
+import br.com.gateway.buy.product.service.ClientService;
+import br.com.muvz.tech.client.api.Client;
 import br.com.muvz.tech.client.api.ClientApi;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.ApiParam;

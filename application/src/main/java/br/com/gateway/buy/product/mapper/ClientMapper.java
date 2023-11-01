@@ -2,6 +2,7 @@ package br.com.gateway.buy.product.mapper;
 
 import br.com.gateway.buy.product.entity.ClientEntity;
 import br.com.muvz.tech.client.api.Client;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 @Builder
 @Component
+@AllArgsConstructor
 public class ClientMapper implements Serializable {
 
     private final ModelMapper modelMapper;

@@ -28,5 +28,12 @@ spring:
       database-platform: org.hibernate.dialect.H2Dialect
       generate-ddl: true
 
+endpoint:
+  url: https://newsapi.org/v2
+  context.everthing: everything
+  context.top.headlines: top-headlines
+  key: 9384f09f12d14caeb58a7145b77ba166
+
+
 server:
   port: 8080

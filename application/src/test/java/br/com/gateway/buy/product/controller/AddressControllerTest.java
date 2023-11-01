@@ -1,23 +1,27 @@
 package br.com.gateway.buy.product.controller;
 
+import br.com.gateway.buy.product.config.ConverterConfig;
 import br.com.gateway.buy.product.config.MessageResourceConfig;
 import br.com.gateway.buy.product.entity.AddressEntity;
 import br.com.gateway.buy.product.mapper.AddressMapper;
-import br.com.gateway.buy.product.mapper.ClientMapper;
 import br.com.gateway.buy.product.service.AddressService;
-import br.com.gateway.buy.product.service.ClientService;
 import br.com.muvz.tech.client.api.Address;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @DisplayName("Teste integration endpoints Address")
 @AutoConfigureMockMvc(addFilters = false)
+@ContextConfiguration(classes = AddressController.class)
 @Import(AddressController.class)
 public class AddressControllerTest {
 
@@ -42,13 +47,11 @@ public class AddressControllerTest {
     @MockBean
     private AddressMapper addressMapper;
     @MockBean
-    private ClientMapper clientMapper;
+    private AddressService addressService;
+
     @MockBean
     private MessageResourceConfig messageResourceConfig;
-    @MockBean
-    private AddressService addressService;
-    @MockBean
-    private ClientService clientService;
+
 
     @Test
     @DisplayName("Endpoint to Address list")
